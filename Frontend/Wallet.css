@@ -1,0 +1,114 @@
+/* General Styles */
+body {
+    background-color: #F5F6FA; /* Soft light gray */
+    color: #333333; /* Dark gray for professional readability */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1E293B; /* Dark navy for a professional tone */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    color: #4C9FF0; /* Soft blue for hover */
+}
+
+.nav-link {
+    color: #C9D1D9;
+}
+
+.nav-link:hover {
+    color: #4C9FF0; /* Soft blue on hover */
+}
+
+/* Card Styles */
+.card {
+    background-color: #FFFFFF; /* Clean white background */
+    border: 1px solid #E5E7EB; /* Light border for separation */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    padding: 20px;
+}
+
+.card h4 {
+    color: #1E293B; /* Navy blue for headings */
+    margin-bottom: 15px;
+}
+
+/* Form Elements */
+.form-control,
+.form-select {
+    background-color: #F9FAFB;
+    color: #333333;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #4C9FF0; /* Blue highlight on focus */
+    outline: none;
+}
+
+.form-label {
+    color: #6B7280; /* Neutral gray for labels */
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #4C9FF0; /* Muted blue for buttons */
+    border: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #2563EB; /* Slightly darker blue on hover */
+    transform: translateY(-2px);
+}
+
+/* Budget Overview */
+#total-budget, #total-expenses {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2563EB;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: #E5E7EB; /* Light gray for header */
+    color: #1E293B; /* Navy blue for text */
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #F9FAFB; /* Alternating light row color */
+}

@@ -6,10 +6,24 @@ import java.net.URL;
 
 public class WalletService {
 
-    // Base URL of the server
     private static final String BASE_URL = "http://localhost:3000/api";
 
-    // Method to send a GET request
+    // Method to fetch monthly report
+    public static String getMonthlyReport(int month, int year) {
+        String endpoint = String.format("/reports/monthly?month=%d&year=%d", month, year);
+        return sendGetRequest(endpoint);
+    }
+
+    // Method to set budget
+    public static String setBudget(String category, double amount, String startDate, String endDate) {
+        String jsonBody = String.format(
+            "{\"category\": \"%s\", \"amount\": %.2f, \"startDate\": \"%s\", \"endDate\": \"%s\"}",
+            category, amount, startDate, endDate
+        );
+        return sendPostRequest("/budgets", jsonBody);
+    }
+
+    // Generic GET request method
     public static String sendGetRequest(String endpoint) {
         try {
             URL url = new URL(BASE_URL + endpoint);
@@ -35,7 +49,7 @@ public class WalletService {
         }
     }
 
-    // Method to send a POST request
+    // Generic POST request method
     public static String sendPostRequest(String endpoint, String jsonBody) {
         try {
             URL url = new URL(BASE_URL + endpoint);
@@ -68,16 +82,13 @@ public class WalletService {
         }
     }
 
-    // Main method to test the service
     public static void main(String[] args) {
-        // Test GET request
-        String transactions = sendGetRequest("/transactions");
-        System.out.println("GET /transactions response: " + transactions);
+        // Example: Fetching a monthly report
+        String report = getMonthlyReport(1, 2025);
+        System.out.println("Monthly Report: " + report);
 
-        // Test POST request
-        String newTransaction = "{\"_id\": \"615c1d8f1c9d44000038d82f\", \"accountType\": \"Cash\", \"accountId\": \"615c1d8f1c9d44000038d82d\", \"amount\": 20.0, \"category\": \"Miscellaneous\", \"subcategory\": \"Other\", \"date\": \"2025-01-17T14:00:00Z\", \"description\": \"Bought snacks\"}";
-        String postResponse = sendPostRequest("/transactions", newTransaction);
-        System.out.println("POST /transactions response: " + postResponse);
+        // Example: Setting a budget
+        String response = setBudget("Food", 500.0, "2025-01-01", "2025-01-31");
+        System.out.println("Set Budget Response: " + response);
     }
 }
-

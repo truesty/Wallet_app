@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Truest Wallet</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,8 @@
                         <a class="nav-link" href="#transactions-section">Reports</a>
                     </li>
                 </ul>
+                <!-- Dark Mode Button -->
+                <button id="toggle-dark-mode" class="btn btn-outline-light btn-sm ms-2">🌙</button>
             </div>
         </div>
     </nav>
@@ -84,7 +86,7 @@
                             <p id="total-expenses">$0</p>
                         </div>
                     </div>
-                    <button class="btn btn-primary w-100 mt-2">Set Budget</button>
+                    <button class="btn btn-primary w-100 mt-2" data-bs-toggle="modal" data-bs-target="#budgetModal">Set Budget</button>
                 </div>
             </div>
         </div>
@@ -109,8 +111,85 @@
                 <tbody id="transactions-table-body"></tbody>
             </table>
         </div>
+
+        <!-- Report Generation Form -->
+        <div class="mt-5">
+            <h4>Generate Report</h4>
+            <form id="report-form">
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <label for="start-date" class="form-label">Start Date</label>
+                        <input type="date" id="start-date" class="form-control" required>
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label for="end-date" class="form-label">End Date</label>
+                        <input type="date" id="end-date" class="form-control" required>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <button type="submit" class="btn btn-primary w-100">Generate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
+    <!-- Budget Modal -->
+    <div class="modal fade" id="budgetModal" tabindex="-1" aria-labelledby="budgetModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="budgetModalLabel">Set Budget</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="budget-form">
+                        <div class="mb-3">
+                            <label for="budget-category" class="form-label">Category</label>
+                            <select id="budget-category" class="form-select" required>
+                                <option value="">Select Category</option>
+                                <option value="food">Food</option>
+                                <option value="transport">Transport</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="utilities">Utilities</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="budget-amount" class="form-label">Budget Amount</label>
+                            <input type="number" id="budget-amount" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Save Budget</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoryModalLabel">Manage Categories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="category-form">
+                        <div class="mb-3">
+                            <label for="new-category" class="form-label">New Category</label>
+                            <input type="text" id="new-category" class="form-control" placeholder="Enter new category" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-subcategory" class="form-label">New Subcategory</label>
+                            <input type="text" id="new-subcategory" class="form-control" placeholder="Enter new subcategory" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Add Category</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Wallet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script src="Wallet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>

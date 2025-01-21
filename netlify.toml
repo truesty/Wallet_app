@@ -1,0 +1,21 @@
+[build]
+  publish = "public"
+  command = "# no build command needed"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://wallet-server-13x5.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[headers]
+  # Define which paths this specific [[headers]] block will cover.
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization" 

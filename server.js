@@ -4,10 +4,17 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const host = '0.0.0.0';
 
 // Log environment details
 console.log('Environment:', process.env.NODE_ENV);
 console.log('Port:', port);
+console.log('Host:', host);
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // CORS configuration
 const corsOptions = {
@@ -26,8 +33,29 @@ app.use(express.static('public'));
 // In-memory data store
 const db = {
     transactions: [],
-    categories: [],
-    accounts: [],
+    categories: [
+        {
+            id: 1,
+            name: 'Salary',
+            type: 'income',
+            createdAt: new Date().toISOString()
+        },
+        {
+            id: 2,
+            name: 'Food',
+            type: 'expense',
+            createdAt: new Date().toISOString()
+        }
+    ],
+    accounts: [
+        {
+            id: 1,
+            name: 'Cash',
+            type: 'cash',
+            balance: 1000,
+            createdAt: new Date().toISOString()
+        }
+    ],
     budgets: [],
     subcategories: []
 };
@@ -223,8 +251,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(port, host, () => {
+    console.log(`Server is running at http://${host}:${port}`);
     console.log(`Process running as user: ${process.env.USER}`);
     console.log(`Working directory: ${process.cwd()}`);
 }); 

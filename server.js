@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 // CORS configuration
 const corsOptions = {
-    origin: '*', // Temporarily allow all origins for testing
+    origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200

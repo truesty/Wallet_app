@@ -5,6 +5,10 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Log environment details
+console.log('Environment:', process.env.NODE_ENV);
+console.log('Port:', port);
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -200,6 +204,8 @@ app.get('*', (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+    console.log(`Process running as user: ${process.env.USER}`);
+    console.log(`Working directory: ${process.cwd()}`);
 }); 

@@ -1,21 +1,23 @@
 [build]
-  base = "public/"
-  publish = ""
+  publish = "public"
+  command = "# no build command needed"
 
 [[redirects]]
   from = "/api/*"
-  to = "https://wallet-server-13x5.onrender.com/api/:splat"
+  to = "https://walletapp-production-ff19.up.railway.app/api/:splat"
   status = 200
   force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[headers]
-  # Define which paths this specific [[headers]] block will cover.
+[[headers]]
+  for = "/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization" 
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Max-Age = "86400" 

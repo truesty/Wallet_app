@@ -37,11 +37,14 @@ const corsOptions = {
     origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200
+    credentials: true,
+    optionsSuccessStatus: 204,
+    maxAge: 86400 // 24 hours
 };
 
 // Middleware
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable pre-flight for all routes
 app.use(express.json());
 app.use(express.static('public'));
 

@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 // CORS configuration
 const corsOptions = {
-    origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000'],
+    origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000', 'https://wallet-server-13x5.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

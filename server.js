@@ -6,7 +6,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const host = '0.0.0.0';
 
-// Log startup information
 console.log('Starting server...');
 console.log('Environment variables:', {
     NODE_ENV: process.env.NODE_ENV,
@@ -15,7 +14,6 @@ console.log('Environment variables:', {
     PATH: process.env.PATH
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
     console.log('Health check requested');
     res.json({ 
@@ -26,29 +24,25 @@ app.get('/health', (req, res) => {
     });
 });
 
-// Request logging middleware
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
     next();
 });
 
-// CORS configuration
 const corsOptions = {
     origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000', 'https://wallet-server-13x5.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
     optionsSuccessStatus: 204,
-    maxAge: 86400 // 24 hours
+    maxAge: 86400
 };
 
-// Middleware
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable pre-flight for all routes
+app.options('*', cors(corsOptions));
 app.use(express.json());
 app.use(express.static('public'));
 
-// In-memory data store
 const db = {
     transactions: [],
     categories: [
@@ -78,7 +72,6 @@ const db = {
     subcategories: []
 };
 
-// Helper function to check budget notifications
 function checkBudgetNotifications(transaction) {
     if (transaction.type !== 'expense') return null;
 
@@ -115,7 +108,6 @@ function checkBudgetNotifications(transaction) {
     return notifications;
 }
 
-// API Routes
 app.get('/api/transactions', (req, res) => {
     const { startDate, endDate } = req.query;
     let filteredTransactions = db.transactions;
@@ -137,10 +129,7 @@ app.post('/api/transactions', (req, res) => {
         createdAt: new Date().toISOString()
     };
     db.transactions.push(transaction);
-
-    // Check budget notifications
     const notifications = checkBudgetNotifications(transaction);
-    
     res.status(201).json({ transaction, notifications });
 });
 
@@ -253,12 +242,10 @@ app.get('/api/reports', (req, res) => {
     res.json(report);
 });
 
-// Serve index.html for all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Error occurred:', {
         message: err.message,
@@ -273,14 +260,12 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
 const server = app.listen(port, host, () => {
     console.log(`Server is running at http://${host}:${port}`);
     console.log(`Process running as user: ${process.env.USER}`);
     console.log(`Working directory: ${process.cwd()}`);
 });
 
-// Handle server errors
 server.on('error', (error) => {
     console.error('Server error:', error);
     process.exit(1);

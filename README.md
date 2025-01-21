@@ -2,10 +2,22 @@
 
 A modern, full-stack web application for managing personal finances, tracking expenses, and monitoring budgets.
 
-## 🌟 Live Demo
+## 🚀 Live Deployment
 
-- Frontend: [https://wallet-truest.netlify.app](https://wallet-truest.netlify.app)
-- Backend: [https://wallet-server-13x5.onrender.com](https://wallet-server-13x5.onrender.com)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/wallet-truest/deploys)
+
+### Access the Application:
+
+👉 **[Live Application - Click Here](https://wallet-truest.netlify.app)**
+
+- Frontend URL: https://wallet-truest.netlify.app
+- Backend API: https://wallet-server-13x5.onrender.com
+
+## 🖼️ Project Preview
+
+![Wallet App Dashboard](https://wallet-truest.netlify.app/preview.png)
+
+*Note: If the preview image is not loading, you can see the live application by clicking the deployment link above.*
 
 ## ✨ Features
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet App Preview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .preview-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card {
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="preview-container">
+        <div class="text-center mb-5">
+            <h1 class="display-4">Personal Wallet App</h1>
+            <p class="lead text-muted">Manage your finances with ease</p>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <!-- Dashboard Preview -->
+            <div class="col-md-8">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Financial Overview</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle">Total Balance</h6>
+                                        <h4 class="mt-2">$12,500.00</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle">Monthly Savings</h6>
+                                        <h4 class="mt-2">$2,300.00</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="previewChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Preview -->
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Key Features</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-chart-line text-primary me-2"></i>
+                                Real-time Transaction Tracking
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-tags text-success me-2"></i>
+                                Category Management
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-wallet text-info me-2"></i>
+                                Multiple Account Support
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-chart-pie text-warning me-2"></i>
+                                Budget Planning
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file-invoice-dollar text-danger me-2"></i>
+                                Financial Reports
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions Preview -->
+        <div class="card feature-card">
+            <div class="card-body">
+                <h5 class="card-title">Recent Transactions</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-01-21</td>
+                                <td>Grocery Shopping</td>
+                                <td>Food</td>
+                                <td class="text-danger">-$120.50</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-20</td>
+                                <td>Monthly Salary</td>
+                                <td>Income</td>
+                                <td class="text-success">+$3,500.00</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-19</td>
+                                <td>Internet Bill</td>
+                                <td>Utilities</td>
+                                <td class="text-danger">-$59.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script>
+        // Initialize preview chart
+        const ctx = document.getElementById('previewChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Income',
+                        data: [3500, 3500, 4000, 3500, 3800, 4200],
+                        borderColor: '#22C55E',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Expenses',
+                        data: [2200, 2400, 2100, 2600, 2300, 2500],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

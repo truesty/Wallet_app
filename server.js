@@ -6,22 +6,37 @@ const app = express();
 const port = process.env.PORT || 3000;
 const host = '0.0.0.0';
 
-// Log environment details
-console.log('Environment:', process.env.NODE_ENV);
-console.log('Port:', port);
-console.log('Host:', host);
+// Log startup information
+console.log('Starting server...');
+console.log('Environment variables:', {
+    NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
+    PWD: process.cwd(),
+    PATH: process.env.PATH
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+    console.log('Health check requested');
+    res.json({ 
+        status: 'ok', 
+        timestamp: new Date().toISOString(),
+        env: process.env.NODE_ENV,
+        port: port
+    });
+});
+
+// Request logging middleware
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
 });
 
 // CORS configuration
 const corsOptions = {
-    origin: ['https://wallet-truest.netlify.app', 'http://localhost:3000'],
+    origin: '*', // Temporarily allow all origins for testing
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
     optionsSuccessStatus: 200
 };
 
@@ -242,7 +257,12 @@ app.get('*', (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Error:', err.stack);
+    console.error('Error occurred:', {
+        message: err.message,
+        stack: err.stack,
+        url: req.url,
+        method: req.method
+    });
     res.status(500).json({
         status: 'error',
         message: 'Internal server error',
@@ -251,8 +271,19 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(port, host, () => {
+const server = app.listen(port, host, () => {
     console.log(`Server is running at http://${host}:${port}`);
     console.log(`Process running as user: ${process.env.USER}`);
     console.log(`Working directory: ${process.cwd()}`);
+});
+
+// Handle server errors
+server.on('error', (error) => {
+    console.error('Server error:', error);
+    process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception:', error);
+    process.exit(1);
 }); 

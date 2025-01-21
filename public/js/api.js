@@ -1,6 +1,6 @@
 class Api {
     constructor() {
-        this.baseUrl = 'https://walletapp-production-ff19.up.railway.app/api';
+        this.baseUrl = 'https://wallet-server-13x5.onrender.com/api';
     }
 
     async request(endpoint, options = {}) {
